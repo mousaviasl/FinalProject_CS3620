@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Your Savings Goals</h1>
+<a class="btn btn-success" href="{% url 'add_goal' %}">Add New Goal</a>
+<hr>
+<div class="row">
+{% for goal in goals %}
+  <div class="col-md-4 mb-3">
+    <div class="card bg-light">
+      <div class="card-body">
+        <h5 class="card-title">{{ goal.name }}</h5>
+        <p>Target: ${{ goal.target_amount }}</p>
+        <p>Saved: ${{ goal.saved_amount }}</p>
+        <div class="progress">
+          <div class="progress-bar" style="width: {{ goal.progress_percentage }}%;" aria-valuenow="{{ goal.progress_percentage }}" aria-valuemin="0" aria-valuemax="100">
+            {{ goal.progress_percentage|floatformat:2 }}%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
